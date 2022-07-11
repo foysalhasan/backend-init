@@ -13,9 +13,12 @@ class myDB {
 
   //✅BUL CREATE TICKETS
   bulkCreate(userName, price, quantity) {
+    let result = [];
     for (let i = 0; i < quantity; i++) {
-      this.createTicket(userName, price);
+      const res = this.createTicket(userName, price);
+      result.push(res);
     }
+    return result;
   }
 
   //✅FIND ALL TICKETS
@@ -39,7 +42,6 @@ class myDB {
   //✅UPDATE TICKET OF A USER
   update(userId, ticketBody) {
     const findTicket = this.findById(userId);
-    console.log(findTicket);
     findTicket.userName = ticketBody.userName ?? findTicket.userName;
     findTicket.price = ticketBody.price ?? findTicket.price;
     findTicket.updatedAt = new Date();
